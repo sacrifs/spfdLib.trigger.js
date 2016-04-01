@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>SpiffieldTriggerDemo</title>
+	<meta name="viewport" content="width=1080" />
+	<style>
+	body{
+		margin:0;
+	}
+	.spriteContainer{
+		width:1080px;
+		margin:auto;
+	}
+	.spriteAnim{
+		float:left;
+		width:360px;
+		height:203px;
+		overflow:hidden;
+		background-image:url("img/sakura_sprite.jpg");
+	}
+	</style>
+</head>
+<body>
+	<div class="spriteContainer">
+		<div class="spriteAnim"></div>
+		<div class="spriteAnim"></div>
+		<div class="spriteAnim"></div>
+		<div class="spriteAnim"></div>
+		<div class="spriteAnim"></div>
+		<div class="spriteAnim"></div>
+	</div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="../util/js/spfd_trigger.js"></script>
+	<script>
+		var colNum = 15;
+		var fps = 30;
+		var w = 360;
+		var h = 203;
+		var ua = navigator.userAgent.toLowerCase();
+		var animation = function(target){
+			return function(fnum){
+				var x = fnum % colNum * w;
+				var y = (fnum / colNum | 0) * h;
+				target.style.backgroundPosition = -x + "px -"+y + "px";
+			};
+		}
+		$(".spriteAnim").each(function(){
+			spfdLib.trigger.addTimer({fps:30, frame:300, func:animation(this)});
+		});
+	</script>
+</body>
+</html>
