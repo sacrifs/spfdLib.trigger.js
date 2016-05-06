@@ -10,7 +10,7 @@ spfdLib.trigger = (function(){
 	_fps = 30,
 	_tickTime = 1000 / _fps,
 	_resizeDelay = 100,
-	_canUseAddEventListener = (window.addEventListener) ? true : false;
+	_canUseAddEventListener = (window.addEventListener) ? true : false,
 	_now = window.performance && (
 	    performance.now		||
 	    performance.mozNow	||
@@ -19,7 +19,7 @@ spfdLib.trigger = (function(){
 	    performance.webkitNow),
 	_startTime = 0,
 	_beforeTime = 0,
-	_isTimerPlay = false,
+	_isTimerPlay = true,
 
 	_timerObjList = [],
 	_resizeObjList = [],
@@ -126,7 +126,7 @@ spfdLib.trigger = (function(){
 	 */
 	timerTick = function(){
 		rafTick(timerTick);
-		if(_isTimerPlay){return;}
+		if(!_isTimerPlay){return;}
 
 	    var lastTime = getCurrentTime();
 		if(lastTime - _beforeTime < _tickTime){return;}
@@ -199,6 +199,8 @@ spfdLib.trigger = (function(){
 		addTimer : addTimer,
 		addResize : addResize,
 		setTimerOption : setTimerOption,
-		setResizeOption : setResizeOption
+		setResizeOption : setResizeOption,
+		timerPlay:timerPlay,
+		timerPause:timerPause
 	};
 })();
